@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class HomeWork2 {
 
-    private final By ARTICLE = By.xpath(".//a[@class = 'sf-with-ul']");
+    private final By ARTICLE = By.xpath(".//a[@title = 'Women']");
 
     @Test
     public void automationPractice() {
@@ -17,5 +17,6 @@ public class HomeWork2 {
         browser.manage().window().setSize(n);
         browser.get("http://automationpractice.com/");
         WebElement article = browser.findElements(ARTICLE).get(0);
+        browser.close();
     }
 }

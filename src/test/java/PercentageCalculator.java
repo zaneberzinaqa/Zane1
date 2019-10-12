@@ -5,17 +5,17 @@ import java.util.Scanner;
 public class PercentageCalculator {
     @Test
         public static void main(String args[]) {
-        float percentage;
-        float total_marks;
-        float scored;
+        double percentage;
+        double total_marks;
+        double scored;
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter a digit:");
-        scored = sc.nextFloat();
+        scored = sc.nextDouble();
 
         System.out.println("Enter a digit:");
-        total_marks = sc.nextFloat();
+        total_marks = sc.nextDouble();
 
-        percentage = (float) ((scored / total_marks) * 100);
+        percentage = (double) ((scored / total_marks) * 100);
         System.out.println("Percentage:" + percentage);
     }
 }
