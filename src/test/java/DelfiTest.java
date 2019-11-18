@@ -5,6 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 public class DelfiTest {
 
     private final By HOME_PAGE_TITLE = By.xpath(".//h1[contains(@class, 'text-size-22')]");
@@ -106,28 +108,28 @@ public class DelfiTest {
 
         Assertions.assertEquals(titleToCompare, apTitle, "Wrong article name");
 
-        //Get comment count - vajag savaakt sarakstu, mes to jau darijam
+        //Get comment count - vajag savaakt sarakstu, mes to jau darijam, sassummet ciparus un tad sanemt iznakumu
 
-        Integer commentsCompare = 0;
+        List<WebElement> allComments = driver.findElements(COMMENT_COUNT);
 
-        if (!article.findElements(COMMENT_COUNT).isEmpty()) { //maina nozīmi uz pretējo
+        for (int i=0; i<allComments.size(); i++) {
 
-            WebElement homePageComments = article.findElement(COMMENT_COUNT);
+            String anonimCommentToParse = allComments.get(0).getText();
 
-            String commentsToParse = homePageComments.getText();
+            anonimCommentToParse = anonimCommentToParse.substring(1, anonimCommentToParse.length() - 1);
 
-            commentsToParse = commentsToParse.substring(1, commentsToParse.length() - 1);
+            Integer anonimComments = Integer.valueOf(anonimCommentToParse);
 
-            commentsCompare = Integer.valueOf(commentsToParse);
+            String registratedComments = allComments.get(1).getText();
 
-        }
+            registratedComments = registratedComments.substring(1, registratedComments.length() - 1);
 
+            Integer registratedComments = Integer.valueOf(registratedComments);
 
-        //Check comment count in comment page - jaunu xpath taisīt
+            Integer registratedComments = Integer.sum(anonimComments, registratedComments);
 
-        Assertions.assertEquals(commentsCompare, apComments, "Wrong comment count in comment section");
+            Assertions.assertEquals(apComments, "Wrong comment count in comment section");
 
-        //Close browser
 
         driver.close();
     }
